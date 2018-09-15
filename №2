@@ -1,69 +1,43 @@
-def game():
-    print("Выберите любой язык из предложенных и ответьте на вопросы")
-    print("Русский, Английский, Испанский, Португальский, Французский, Немецкий, Латинский, Итальянский, Финский, Шведский, Японский, Китайский, Белорусский, Украинский, Греческий, Египетский, Арабский")
-    q1 = input("В этом языке используется латиница?\n")
-    if q1 == "да":
-        q2 = input("Этот язык международный?\n")
-        if q2 == "да":
-            q3 = input("На нем разговаривают в жарких странах?\n")
-            if q3 == "да":
-                q4 = input("В этом языке используются ¿ и ¡?\n")
-                if q4 == "да":
-                    answer = "Испанский"
-                else:
-                    answer = "Португальский"
-            else:
-                q4 = input("Этот язык самый распространенный?\n")
-                if q4 == "да":
-                    answer = "Английский"
-                else:
-                    q5 = input("В этом языке всегда ударение на последний слог?\n")
-                    if q5 == "да":
-                        answer = "Французский"
-                    else:
-                        answer = "Немецкий"
+numbers = input('Введите числа через запятую \n').split(',')
+naturalNum = []
+primeNum = []
+oddNum = []
+evenNum = []
+wholeNum = []
+floatNum = []
+complexNum = []
+def isPrime(number):
+        if number < 2:
+                return False
+        for i in range(2,number):
+                if not number % i:
+                        return False
+        return True
+for i in range(len(numbers)):
+        if numbers[i].find('j') != -1:
+                numbers[i] = complex(numbers[i])
+                complexNum.append(numbers[i]) 
+        elif numbers[i].find('.') != -1:
+                numbers[i] = float(numbers[i])
+                complexNum.append(complex(numbers[i]))
+                floatNum.append(numbers[i])
         else:
-            q3 = input("Этот язык европейский?\n")
-            if q3 == "нет":
-                print("Латинский")
-            else:
-                q4 = input("Алфавит этого языка наименьший среди европейских?\n")
-                if q4 == "да":
-                    answer = "Итальянский"
+                numbers[i] = int(numbers[i])
+                wholeNum.append(numbers[i])
+                floatNum.append(float(numbers[i]))
+                complexNum.append(complex(numbers[i]))
+                if isPrime(numbers[i]):
+                        primeNum.append(numbers[i])
+                if numbers[i] % 2 == 0:
+                        evenNum.append(numbers[i])
                 else:
-                    q5 = input("В этом языке часто встречаются сдвоенные гласные?\n")
-                    if q5 == "да":
-                        answer = "Финский"
-                    else:
-                        answer = "Шведский"
-    else:
-        q2 = input("В этом языке используется кириллица?\n")
-        if q2 == "да":
-            q3 = input("Этот вопрос задан на этом языке?\n")
-            if q3 == "да":
-                answer = "Русский"
-            else:
-                q4 = input("В алфавите этого языка присутствует ў?\n")
-                if q4 == "да":
-                    answer = "Белорусский"
-                else:
-                    answer = "Украинский"
-        else:
-            q3 = input("В этом языке символы выглядят как иероглифы?\n")
-            if q3 == "да":
-                q4 = input("Иероглифы в этом языке массивные и квадратные?\n")
-                if q4 == "да":
-                    answer = "Китайский"
-                else:
-                    answer = "Японский"
-            else:
-                q4 = input("В этом языке используются греческие буквы?\n")
-                if q4 == "да":
-                        answer = "Греческий"
-                else:
-                    q5 = input("В этом языке используются рисунки?\n")
-                    if q5 == "да":
-                        answer = "Египетский"
-                    else:
-                        answer = "Арабский"
-    print("Ваш язык - ", answer)
+                        oddNum.append(numbers[i])
+                if numbers[i] > 0:
+                        naturalNum.append(numbers[i])
+print('Натуральные числа:', naturalNum)
+print('Простые числа', primeNum)
+print('Нечетные числа: ', oddNum)
+print('Четные числа: ', evenNum)
+print('Целые числа: ', wholeNum)
+print('Вещественные числа: ', floatNum)
+print('Комплексные числа: ', complexNum)
