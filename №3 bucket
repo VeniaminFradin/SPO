@@ -1,69 +1,42 @@
-def game():
-    print("Выберите любой язык из предложенных и ответьте на вопросы")
-    print("Русский, Английский, Испанский, Португальский, Французский, Немецкий, Латинский, Итальянский, Финский, Шведский, Японский, Китайский, Белорусский, Украинский, Греческий, Египетский, Арабский")
-    q1 = input("В этом языке используется латиница?\n")
-    if q1 == "да":
-        q2 = input("Этот язык международный?\n")
-        if q2 == "да":
-            q3 = input("На нем разговаривают в жарких странах?\n")
-            if q3 == "да":
-                q4 = input("В этом языке используются ¿ и ¡?\n")
-                if q4 == "да":
-                    answer = "Испанский"
-                else:
-                    answer = "Португальский"
-            else:
-                q4 = input("Этот язык самый распространенный?\n")
-                if q4 == "да":
-                    answer = "Английский"
-                else:
-                    q5 = input("В этом языке всегда ударение на последний слог?\n")
-                    if q5 == "да":
-                        answer = "Французский"
-                    else:
-                        answer = "Немецкий"
-        else:
-            q3 = input("Этот язык европейский?\n")
-            if q3 == "нет":
-                print("Латинский")
-            else:
-                q4 = input("Алфавит этого языка наименьший среди европейских?\n")
-                if q4 == "да":
-                    answer = "Итальянский"
-                else:
-                    q5 = input("В этом языке часто встречаются сдвоенные гласные?\n")
-                    if q5 == "да":
-                        answer = "Финский"
-                    else:
-                        answer = "Шведский"
-    else:
-        q2 = input("В этом языке используется кириллица?\n")
-        if q2 == "да":
-            q3 = input("Этот вопрос задан на этом языке?\n")
-            if q3 == "да":
-                answer = "Русский"
-            else:
-                q4 = input("В алфавите этого языка присутствует ў?\n")
-                if q4 == "да":
-                    answer = "Белорусский"
-                else:
-                    answer = "Украинский"
-        else:
-            q3 = input("В этом языке символы выглядят как иероглифы?\n")
-            if q3 == "да":
-                q4 = input("Иероглифы в этом языке массивные и квадратные?\n")
-                if q4 == "да":
-                    answer = "Китайский"
-                else:
-                    answer = "Японский"
-            else:
-                q4 = input("В этом языке используются греческие буквы?\n")
-                if q4 == "да":
-                        answer = "Греческий"
-                else:
-                    q5 = input("В этом языке используются рисунки?\n")
-                    if q5 == "да":
-                        answer = "Египетский"
-                    else:
-                        answer = "Арабский"
-    print("Ваш язык - ", answer)
+def bucketSort(numbers):
+    # looking for max and min elements
+    min = numbers[0]
+    max = numbers[0]
+    for i in range(1,len(numbers)):
+        if numbers[i] < min:
+            min = numbers[i]
+        if numbers[i] > max:
+            max = numbers[i]
+    dif = max - min
+    if dif == 0:
+        return numbers
+    # number of buckets (at least 2)
+    n = len(numbers)   
+    buckets = [[] for i in range(n)]
+    # put numbers in bucket
+    for i in range(len(numbers)):
+        index = int((numbers[i]-min)/dif*(n-1))
+        buckets[index].append(numbers[i])
+    output = []
+    # use insertion sort
+    for i in range(n):
+        insertionSort(buckets[i])
+    # concat all data
+    for i in range(len(buckets)):
+        while len(buckets[i]) > 0:
+            output.append(buckets[i].pop(0))
+    return output
+
+def insertionSort(numbers):
+    if len(numbers) > 1:
+        for i in range(1, len(numbers)):
+            x = numbers[i]
+            index= i
+            while ((index > 0) and (numbers[index-1] > x)):
+                numbers[index] = numbers[index-1]
+                index = index - 1
+            numbers[index] = x
+    return numbers   
+numbers = [int(i) for i in input('Введите натуральные числа через пробел ').split()]
+numbers = bucketSort(numbers)
+print(numbers)
