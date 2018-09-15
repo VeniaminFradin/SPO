@@ -1,69 +1,43 @@
-def game():
-    print("Выберите любой язык из предложенных и ответьте на вопросы")
-    print("Русский, Английский, Испанский, Португальский, Французский, Немецкий, Латинский, Итальянский, Финский, Шведский, Японский, Китайский, Белорусский, Украинский, Греческий, Египетский, Арабский")
-    q1 = input("В этом языке используется латиница?\n")
-    if q1 == "да":
-        q2 = input("Этот язык международный?\n")
-        if q2 == "да":
-            q3 = input("На нем разговаривают в жарких странах?\n")
-            if q3 == "да":
-                q4 = input("В этом языке используются ¿ и ¡?\n")
-                if q4 == "да":
-                    answer = "Испанский"
-                else:
-                    answer = "Португальский"
-            else:
-                q4 = input("Этот язык самый распространенный?\n")
-                if q4 == "да":
-                    answer = "Английский"
-                else:
-                    q5 = input("В этом языке всегда ударение на последний слог?\n")
-                    if q5 == "да":
-                        answer = "Французский"
-                    else:
-                        answer = "Немецкий"
-        else:
-            q3 = input("Этот язык европейский?\n")
-            if q3 == "нет":
-                print("Латинский")
-            else:
-                q4 = input("Алфавит этого языка наименьший среди европейских?\n")
-                if q4 == "да":
-                    answer = "Итальянский"
-                else:
-                    q5 = input("В этом языке часто встречаются сдвоенные гласные?\n")
-                    if q5 == "да":
-                        answer = "Финский"
-                    else:
-                        answer = "Шведский"
-    else:
-        q2 = input("В этом языке используется кириллица?\n")
-        if q2 == "да":
-            q3 = input("Этот вопрос задан на этом языке?\n")
-            if q3 == "да":
-                answer = "Русский"
-            else:
-                q4 = input("В алфавите этого языка присутствует ў?\n")
-                if q4 == "да":
-                    answer = "Белорусский"
-                else:
-                    answer = "Украинский"
-        else:
-            q3 = input("В этом языке символы выглядят как иероглифы?\n")
-            if q3 == "да":
-                q4 = input("Иероглифы в этом языке массивные и квадратные?\n")
-                if q4 == "да":
-                    answer = "Китайский"
-                else:
-                    answer = "Японский"
-            else:
-                q4 = input("В этом языке используются греческие буквы?\n")
-                if q4 == "да":
-                        answer = "Греческий"
-                else:
-                    q5 = input("В этом языке используются рисунки?\n")
-                    if q5 == "да":
-                        answer = "Египетский"
-                    else:
-                        answer = "Арабский"
-    print("Ваш язык - ", answer)
+#bubble 
+def bubbleSort(numbers):
+	n = 1
+	while n < len(numbers):
+		for i in range(len(numbers)-1):
+			if numbers[i] > numbers[i+1]:
+				numbers[i], numbers[i+1] = numbers[i+1], numbers[i]
+		n += 1
+	print(numbers)
+
+#heap
+def heapSort(numbers):
+	def downHeap(numbers, index, size):
+		newElem = numbers[index]
+		while 2 * index + 1 < size:
+			child = 2 * index + 1
+			if child + 1 < size and numbers[child] < numbers[child + 1]:
+				child += 1
+			if newElem >= numbers[child]:
+				break
+			numbers[index] = numbers[child]
+			index = child
+		numbers[index] = newElem
+	size = len(numbers)
+	for i in range(size//2-1, -1, -1):
+		downHeap(numbers, i, size)
+	for i in range(size-1, 0, -1):
+		numbers[i], numbers[0] = numbers[0], numbers[i]
+		downHeap(numbers, 0, i)
+	print(numbers)
+
+#gnome 
+def gnomeSort(numbers):
+	i = 1
+	while i < len(numbers):
+		if i == 0:
+			i = 1
+		if numbers[i-1] < numbers[i]:
+			i += 1
+		else:
+			numbers[i-1], numbers[i] = numbers[i], numbers[i-1]
+			i -= 1
+	print(numbers)
